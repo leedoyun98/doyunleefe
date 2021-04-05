@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "image": "/assets/img/icon-img/support-1.png",
+      "title": "Free Shipping",
+      "subtitle": "50,000원 이상 구매 시 무료배송"
+    },
+    {
+      "id": 2,
+      "image": "/assets/img/icon-img/support-2.png",
+      "title": "Support 24/7",
+      "subtitle": "챗봇을 통해 24시간 상담 접수 가능 \n (상담원 연결 : AM 9:00 ~ PM 6:00)"
+    },
+    {
+      "id": 3,
+      "image": "/assets/img/icon-img/support-3.png",
+      "title": "Money Return",
+      "subtitle": "이상이 있는 제품에 한해 무료반품 서비스 제공"
+    }
+  ]
+  

@@ -1,0 +1,1 @@
+export {default as UserLoginRegister} from '__user__/pages/UserLoginRegister'
