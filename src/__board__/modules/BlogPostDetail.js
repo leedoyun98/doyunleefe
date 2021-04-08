@@ -28,6 +28,7 @@ const remove = () => {
 }     
 return (
   <>
+
       <div className="blog-details-top">
       <div className="blog-details-img">
       <img
@@ -49,8 +50,9 @@ return (
         {boards.brdContent}
         </p>
         <div>
+        {localStorage.getItem("token")!=null &&(JSON.stringify(JSON.parse(localStorage.getItem("user")).usrNo) === boards.usrNo) ? <>
     <a href="#" ><Link to={process.env.PUBLIC_URL +"/blog-update/"+boards.brdNo}>글 수정하기</Link></a><br/>
-    <a href="#"  onClick={remove}>글 삭제하기</a>
+    <a href="#"  onClick={remove}>글 삭제하기</a></> : ''}
     </div>
       </div>
     </div>

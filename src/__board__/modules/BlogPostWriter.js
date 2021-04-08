@@ -1,4 +1,4 @@
-import React, { useState, Fragment,useEffect } from 'react'
+import React, { useState, Fragment,useEffect,useCallback } from 'react'
 import { Link } from "react-router-dom";
 import {makeStyles} from '@material-ui/styles'
 import axios from 'axios'
@@ -10,15 +10,23 @@ import  { useHistory} from 'react-router';
 
 const BlogPostWriter = () => {
   const history = useHistory()
-  const [brdTitle, setBrdTitle] = useState('')
-  const [brdContent, setBrdContent] = useState('')
   const [brdWrtDate, setBrdWrtDate] = useState('')
   const [brdRank, setBrdRank] = useState('')
-  const [brdImg, setBrdImg] = useState('')
   const [brdLike, setBrdLike] = useState('')
   const [brdNikcname, setBrdNikcname] = useState('')
-  const [brdKind, setBrdKind] = useState('')
   const { register,handleSubmit} = useForm() 
+  const [writer, setWriter] = useState({
+    brdTitle: "",
+    brdContent: "",
+    brdImg: "",
+    brdKind: 1,
+    usrName: JSON.parse(localStorage.getItem("user")).usrName, 
+    usrNo: JSON.parse(localStorage.getItem("user")).usrNo
+  })
+  const {brdTitle,brdContent,brdImg} = writer
+  const onChange = useCallback(e=> {
+    setWriter({...writer,[e.target.name]: e.target.value})
+  })
 
   const wrt = e => {
     e.preventDefault()
@@ -29,7 +37,7 @@ const BlogPostWriter = () => {
         'Content-Type'  : 'application/json',
         'Authorization' : 'JWT fefege..'
       },
-      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 1}
+      data: writer
     })
   .then(resp => {
     alert('글쓰기 성공')
@@ -41,23 +49,23 @@ const BlogPostWriter = () => {
   }
   
   return (<>
-
-    <Fragment>
+  {localStorage.getItem("user")!=null ? <>
       <div className="blog-details-top">
         <div className="blog-details-img">
           <form onSubmit={handleSubmit()}>
         <div>
         <h5>사진 업로드: 
-        <input ref={register} type="file"accept="image/*" name="brdImg" onChange={ e => {setBrdImg(`${ e.target.value }`)}}/>
+        <input ref={register} type="file"accept="image/*" name="brdImg" onChange={onChange}/>
         </h5>
        </div>
        </form>
         </div>
         <div className="blog-details-content">
     <form>
-         <td ><h3><input type="text" placeholder="글 제목 입력"   onChange = { e => {setBrdTitle(`${e.target.value}`)}}/></h3></td>
+        작성자: {JSON.parse(localStorage.getItem("user")).usrName}
+         <td ><h3><input type="text" placeholder="글 제목 입력"  name="brdTitle" onChange={onChange}/></h3></td>
           <div type></div>
-          <td><textarea rows="30" cols="200"  placeholder="글 내용 입력"  onChange = { e => {setBrdContent(`${e.target.value}`)}}
+          <td><textarea rows="30" cols="200"  placeholder="글 내용 입력" name="brdContent" onChange={onChange}
           >
        </textarea></td></form>
         </div>
@@ -78,9 +86,8 @@ const BlogPostWriter = () => {
             </li>
           </ul>
         </div>
-      </div>
-  
-    </Fragment>
+      </div></>
+ :'존재하지 않는 페이지 입니다.'}
     </>
   );
 };

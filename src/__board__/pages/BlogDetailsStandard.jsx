@@ -4,8 +4,7 @@ import MetaTags from "react-meta-tags"
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic"
 import LayoutOne from "layouts/LayoutOne"
 import Breadcrumb from "wrappers/breadcrumb/Breadcrumb"
-import BlogComment from "wrappers/blog/BlogComment"
-import {BlogPostDetail} from "__board__/index"
+import {BlogPostDetail,BlogComment} from "__board__/index"
 import axios from 'axios'
 const BlogDetailsStandard = ({ location, match }) => {
   const { pathname } = location; 

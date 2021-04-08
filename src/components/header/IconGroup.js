@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import MenuCart from "./sub-components/MenuCart";
 import { deleteFromCart } from "../../redux/actions/cartActions";
-
+import  { useHistory} from 'react-router'
 const IconGroup = ({
   currency,
   cartData,
@@ -23,8 +23,17 @@ const IconGroup = ({
     );
     offcanvasMobileMenu.classList.add("active");
   };
+  const history = useHistory()
+  const logout = () => {
+    history.go()
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
+}
+
+
 
   return (
+    <>
     <div
       className={`header-right-wrap ${iconWhiteClass ? iconWhiteClass : ""}`}
     >
@@ -50,14 +59,13 @@ const IconGroup = ({
         </button>
         <div className="account-dropdown">
           <ul>
-            <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>
+          <li>
+              {localStorage.getItem("token")!==null ? JSON.parse(localStorage.getItem("user")).usrName+ `님 환영합니다`:<Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>}
             </li>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                Register
-              </Link>
+              {localStorage.getItem("token")!== null ? <Link onClick={logout}>Logout</Link>: <Link to={process.env.PUBLIC_URL + "/login-register"}>Register</Link>}
             </li>
+            
             <li>
               <Link to={process.env.PUBLIC_URL + "/my-account"}>
                 my account
@@ -113,7 +121,7 @@ const IconGroup = ({
         </button>
       </div>
     </div>
-  );
+  </>);
 };
 
 IconGroup.propTypes = {

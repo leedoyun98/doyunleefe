@@ -1,4 +1,4 @@
-import React, { useState, Fragment,useEffect } from 'react'
+import React, { useState, Fragment,useEffect,useCallback } from 'react'
 import { Link, Route, Router } from "react-router-dom";
 import {makeStyles} from '@material-ui/styles'
 import axios from 'axios';
@@ -10,20 +10,24 @@ const useStyles = makeStyles (()=>({
 
 const BlogPostUpdate = ({match,props,boards}) => {
 const [board, setBoard] = useState([])
-
-
-const history = useHistory()
   const [brdNo, setBrdNo] = useState('')
-  const [brdTitle, setBrdTitle] = useState('')
-  const [brdContent, setBrdContent] = useState('')
   const [brdWrtDate, setBrdWrtDate] = useState('')
   const [brdRank, setBrdRank] = useState('')
   const [brdImg, setBrdImg] = useState('')
   const [brdLike, setBrdLike] = useState('')
   const [brdNikcname, setBrdNikcname] = useState('')
-  const { register,handleSubmit} = useForm() 
+  const [brdKind, setBrdKind] = useState('')
 
-
+    const history = useHistory()
+    const [update, setUpdate] = useState({
+      brdNo: boards.brdNo,
+      brdTitle: boards.brdTitle,
+      brdContent: boards.brdContent
+    })
+    const {brdTitle,brdContent} = update
+    const onChange = useCallback(e=> {
+      setUpdate({...update,[e.target.name]: e.target.value})
+    })
 
 // useEffect(()=>{
 //   alert(match.params.id)
@@ -44,61 +48,38 @@ const blogUpdate = e => {
     url: `http://localhost:8080/board/update/`+boards.brdNo,
     method: 'put',
     headers: {'Content-Type': 'application/json','Authorization': 'JWT fefege..'},
-  data: {brdNo: boards.brdNo,brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname}
+  data: update
   })
   .then(resp => {
     alert('글수정 성공')
-    history.push('/blog-list')
+    history.goBack()
   })
   .catch(err => {
     alert('글수정 실패')
   })
   }
-  // const bb = () => {
-  //   const blogPostUpdate = window.confirm("해당 글을 수정하시겠습니까?")
-  //   if(blogPostUpdate)axios.put(`http://localhost:8080/board/update/`+match.params.id,
-  //     {
-  //     brdNo: localStorage.getItem('brdNo'),brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname}
-  //   )
-  //   .then(resp => {
-  //     alert('수정되었습니다')
-  //     history.push('/blog-list')
-  //   })
-  //   .catch(err => {
-  //     alert(`글수정 실패`)
-  //   })
-  //   }
-  return (
-    <Fragment>
+
+  return (<>
+    {localStorage.getItem("token")!=null &&(JSON.stringify(JSON.parse(localStorage.getItem("user")).usrNo) === boards.usrNo) ? <>
     <div>
       <div>
-            <>
-              {/* <div>
-                <label>번호: </label>
-                <label onChange = { e => {setBrdNo(`${board.brdNo}`)}}>{board.brdNo}</label>
-              </div> */}
-
               <div >
                 <label>제목: </label>
-                <label><input type="text" placeholder={boards.brdTitle}  onChange = { e => {setBrdTitle(`${e.target.value}`)}}/></label>
+                <label><input type="text" placeholder={boards.brdTitle} name="brdTitle"  onChange = {onChange}/></label>
               </div> 
               
               <div >
                 <label>내용: </label>
                 <div>
-                <textarea rows="55" cols="250"  placeholder={boards.brdContent}  onChange = { e => {setBrdContent(`${e.target.value}`)}}
+                <textarea rows="55" cols="250"  placeholder={boards.brdContent} name="brdContent" onChange = {onChange}
           />
                 </div>
               </div>
-              <a href="#"  key={boards.brdNo} onClick={blogUpdate} >수정완료</a>
-            </>
-         
-        
+              <a href="#"  key={boards.brdNo} onClick={blogUpdate} >수정완료</a> 
         </div>
         </div>
-        </Fragment>
-
-    
+</>:'존재하지 않는 페이지 입니다.'}
+</>
   );
 };
 

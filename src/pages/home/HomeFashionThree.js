@@ -8,32 +8,12 @@ import React, { useState, Fragment,useEffect } from 'react'
 import axios from 'axios';
 
 const HomeFashionThree = () => {
-  const [board, setBoard] = useState([])
-  const URL = '/board/all'
- useEffect(()=>{
-   axios.get(URL, )
-   .then((resp) => {
-     alert('restful success')
-     setBoard(resp.data)
-   })
-   .catch((error) => {
-     alert('실패')
-     throw error;
-   })
-   
- },[])
-  return (<>
-   <ul>
-     {board.map(i => (
-       <il
-         key = {i.brdNo}
-         >
-           {i.brdContent}
-       </il>
-     ))}
-     </ul>
-    <Fragment>
-      <MetaTags>
+ 
+//  {localStorage.getItem("token")!==null? :}
+  return (
+<>
+    {localStorage.getItem("token")!==null ?  
+    <><MetaTags>
         <title>Flone | Fashion Home</title>
         <meta
           name="description"
@@ -53,9 +33,8 @@ const HomeFashionThree = () => {
         <NewProductGrid category="accessories" limit={10} />
         {/* blog featured */}
         <BlogFeatured spaceBottomClass="pb-55" />
-      </LayoutOne>
-    </Fragment>
-    </>
+      </LayoutOne></> : '없음'}
+  </>
   );
 };
 

@@ -11,7 +11,6 @@ import axios from 'axios'
 const BlogUpdate = ({ location ,match}) => {
   const [boards, setBoards] = useState([])
   useEffect(()=>{
-    alert(match.params.id)
    axios.get(`http://localhost:8080/board/opt/`+match.params.id, )
    .then(({data}) => {
     setBoards(data)
@@ -26,7 +25,7 @@ const BlogUpdate = ({ location ,match}) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Blog update</title>
+        <title>Flone | update</title>
         <meta
           name="description"
           content="Blog update page of flone react minimalist eCommerce template."
@@ -35,24 +34,11 @@ const BlogUpdate = ({ location ,match}) => {
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
-        {/* breadcrumb */}
         <Breadcrumb />
         <div className="blog-area pt-100 pb-100">
           <div className="container">
             <div className="row flex-row-reverse">
-              <div className="col-lg-9">
-                <div className="blog-details-wrapper ml-20">
-                  {/* blog post */}
                   <BlogPostUpdate boards={boards} key={boards.brdNo}/>
-
-                  {/* blog post comment */}
-                  <BlogComment />
-                </div>
-              </div>
-              <div className="col-lg-3">
-                {/* blog sidebar */}
-                <BlogSidebar />
-              </div>
             </div>
           </div>
         </div>

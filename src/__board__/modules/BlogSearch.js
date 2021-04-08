@@ -3,7 +3,7 @@ import React, { useState, Fragment,useEffect,Component,useCallback } from 'react
 import axios from 'axios';
 import styled, { createGlobalStyle } from "styled-components";
 
-const BlogPostList= ({ history })=>{
+const BlogSearch= ({ history,boards })=>{
   const [board, setBoard] = useState([])
   const [search, setSearch] = useState({
     brdTitle: "",
@@ -14,43 +14,23 @@ const BlogPostList= ({ history })=>{
   })
 
 
- useEffect(()=>{
-    axios({
-    url: 'http://localhost:8080/board/blogAll',
-    method: 'get',
-    headers: {
-      'Content-Type'  : 'application/json',
-      'Authorization' : 'JWT fefege..'
-    },
-    data: {}
-  })
-   .then((res) => {
-    setBoard(res.data)
 
-   })
-   .catch((error) => {
-     alert('실패')
-     throw error;
-   })
-   
- },[])
 
   return (
  <>
-      {board ? board.map (b=>
       <div className="col-lg-4 col-md-6 col-sm-12"  >
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
             
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={b.brdImg} alt={b.brdImg} /> 
+                src={boards.brdImg} alt={boards.brdImg} /> 
             </Link>
           </div>
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>{b.brdWrtDate}</li>
+                <li>{boards.brdWrtDate}</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                      <i className="fa fa-comments-o"/>
@@ -60,14 +40,14 @@ const BlogPostList= ({ history })=>{
             </div>
             <h4>
        
-              <Link to={process.env.PUBLIC_URL + `/blog-details-standard/${b.brdNo}`} key={b.brdNo} >
-              {b.brdTitle}
+              <Link to={process.env.PUBLIC_URL + `/blog-details-standard/${boards.brdNo}`} key={boards.brdNo} >
+              {boards.brdTitle}
               </Link>
             </h4>
-                  작성자: {b.usrName} 
+                  작성자: {boards.usrName} 
             <div className="blog-share-comment">
               <div className="blog-btn-2">
-                  조회수: {b.brdCount} 
+                  조회수: {boards.brdCount} 
               </div>
               <div className="blog-share">
                 <span>share :</span>
@@ -98,12 +78,12 @@ const BlogPostList= ({ history })=>{
           
           </div>
        
-      ) : '조회 할 페이지가 없습니다'}
+      ) 
           <div className="same-style header-search d-none d-lg-block">
           <div className="sidebar-widget">
       <h4 className="pro-sidebar-title"> </h4>
       <div className="pro-sidebar-search mb-50 mt-25">
-        <form className="pro-sidebar-search-form" action="#">
+      <form className="pro-sidebar-search-form" action="#">
           <input type="text" placeholder="Search here..."onChange={onChange}  />
           <button onClick={`/blog-search/${search}`} >
             <i className="pe-7s-search" />
@@ -120,4 +100,4 @@ const BlogPostList= ({ history })=>{
  </> );
       };
 
-export default BlogPostList
+export default BlogSearch
