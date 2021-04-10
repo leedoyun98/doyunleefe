@@ -1,0 +1,12 @@
+export {default as BlogDetail} from '__reply__/pages/RplsWriter'
+export {default as BlogList} from '__reply__/pages/BlogList'
+export {default as BlogDetailsStandard} from '__reply__/pages/BlogDetailsStandard'
+export {default as BlogUpdate} from '__reply__/pages/BlogUpdate'
+
+export {default as BlogPostDetail}  from '__reply__/modules/BlogPostDetail'
+export {default as BlogPostList} from '__reply__/modules/BlogPostList'
+export {default as BlogPostWriter} from '__reply__/modules/RplPostWriter'
+export {default as BlogPostUpdate} from '__reply__/modules/BlogPostUpdate'
+export {default as BlogSearchList} from '__reply__/pages/BlogSearchList'
+export {default as BlogComment} from '__reply__/modules/BlogComment'
+export {default as BlogSearch} from '__reply__/modules/BlogSearch'

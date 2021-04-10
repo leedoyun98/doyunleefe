@@ -6,7 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogPostDetail, BlogSearchList} from '__board__/index'
+import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogPostDetail, BlogSearchList,CommentUpdate} from '__board__/index'
 import { CartPage, ProductListPage, ProductDetailPage, ProductAddPage, ProductEditPage } from "__product__/index"
 import {UserLoginRegister} from "__user__/index"
 // home pages
@@ -101,14 +101,14 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/product-edit/:id"}
                   component={ProductEditPage}
                 />
-                 <Route
+                 {/* <Route
                   path={process.env.PUBLIC_URL +"/blog-search/:id"}
                   render={(routeProps) => (
                     <BlogUpdate {...routeProps} key={routeProps.match.params.id} />
                   )}
-                />
+                /> */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-search/:id"}
+                  path={process.env.PUBLIC_URL + "/blog-search"}
                   component={BlogSearchList}
                 />   
                 {/* Blog pages */}
@@ -121,6 +121,17 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/blog-update/:id"}
                   component={BlogUpdate}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL +"/comment-update/:id"}
+                  render={(routeProps) => (
+                    <CommentUpdate {...routeProps} key={routeProps.match.params.id} />
+                  )}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/comment-update/:id"}
+                  component={CommentUpdate}
                 />
                
                 <Route

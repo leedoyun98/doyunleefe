@@ -16,6 +16,9 @@ const BlogPagination = () => {
           <button>2</button>
         </li>
         <li>
+          <button>3</button>
+        </li>
+        <li>
           <button className="next">
             <i className="fa fa-angle-double-right" />
           </button>

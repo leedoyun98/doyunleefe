@@ -3,11 +3,11 @@ import Tab from 'react-bootstrap/Tab'
 import Nav from 'react-bootstrap/Nav'
 import axios from 'axios'
 import { Link, Route, Router } from "react-router-dom";
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,useCallback} from 'react'
 import {useHistory} from 'react-router'
 import {useForm} from 'react-hook-form'
 import UserAdmin from '__user__/pages/UserAdmin';
-const ProductDescriptionTab = ({ spaceBottomClass }) => {
+const ProductDescriptionTab = ({ spaceBottomClass,match }) => {
   const history = useHistory()
   const [brdTitle, setBrdTitle] = useState('')
   const [brdContent, setBrdContent] = useState('')
@@ -19,9 +19,23 @@ const ProductDescriptionTab = ({ spaceBottomClass }) => {
   const [brdKind, setBrdKind] = useState('')
   const { register,handleSubmit} = useForm() 
   const [board, setBoard] = useState([])
-  const [brdNo, setBrdNo] = useState('')
+
+  const [state, setState] = useState(true);
+
+  const [dele, setDele] = useState({
+    brdNo: ""
+  })
+  const {brdNo} = dele
+  const onChange = useCallback(e=> {
+    setDele({...dele,[e.target.name]: e.target.value})
+  })
+
+  function toggle() {
+    setState(!state);
+  }
   const review = e => {
     e.preventDefault()
+    
     axios({
       url: 'http://localhost:8080/board/save',
       method: 'post',
@@ -52,7 +66,7 @@ const ProductDescriptionTab = ({ spaceBottomClass }) => {
   })
    .then((res) => {
     setBoard(res.data)
-    setBrdNo(res.data)
+
    })
    .catch((error) => {
      alert('실패')
@@ -61,19 +75,23 @@ const ProductDescriptionTab = ({ spaceBottomClass }) => {
    
  },[])
  const remove = () => {
+   alert(localStorage.getItem("brdNo"))
   const removeBlog = window.confirm("해당 리뷰를 삭제하시겠습니까?")
   if(removeBlog){
     axios({
-      url: `http://localhost:8080/board/delete/`+localStorage.getItem("brdNo"),
+      url: `http://localhost:8080/board/delete/`+localStorage.getItem('brdNo'),
       method: 'delete',
-      data: { brdNo:localStorage.getItem("brdNo") }
+      data: {brdNo: localStorage.getItem('brdNo')}
      })
   .then(resp => {
     alert('글이 삭제 되었습니다')
     history.go()
+    localStorage.removeItem("brdNo")
+    
   })
   .catch(err => {
     alert('글 삭제 실패')
+    localStorage.removeItem("brdNo")
     throw err
   })
   }
@@ -167,13 +185,17 @@ const ProductDescriptionTab = ({ spaceBottomClass }) => {
                             {localStorage.getItem("token")!=null ? <>
                             {JSON.parse(localStorage.getItem("user")).usrNo==b.usrNo ?<>
                             <button><Link to={process.env.PUBLIC_URL + `/blog-update/${b.brdNo}`}>수정하기</Link></button>
-                            <button  onClick={remove} ><Link to={localStorage.setItem("brdNo",JSON.stringify(b.brdNo))}>삭제하기</Link></button></>:''}</> : ''}
+                            <Link onClick={remove}><a onClick={()=>{localStorage.setItem("brdNo",b.brdNo)}} >삭제하기</a></Link></>:''}</> : ''}
                             </div>
                           </div>
                           <div className='review-bottom'>
                             <p>
                              {b.brdContent}
                              </p>
+                             {/* <h2 onClick={toggle}>
+                             <div className="toggle">
+          {state ? <span>{b.brdLike}</span> : <span>No! 👎</span>}
+        </div></h2> */}
                              작성자: {b.usrName}
                              <div className="review-left">
                            작성시간: {b.brdWrtDate}

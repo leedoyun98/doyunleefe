@@ -29,6 +29,19 @@ const [board, setBoard] = useState([])
       setUpdate({...update,[e.target.name]: e.target.value})
     })
 
+// useEffect(()=>{
+//   alert(match.params.id)
+//  axios.get(URL, )
+//  .then(({data}) => {
+//   setBoard(data)
+//   setBrdNo(data)
+//  })
+//  .catch((error) => {
+//    alert('실패')
+//    throw error;
+//  })
+ 
+// },[])
 const blogUpdate = e => {
   e.preventDefault()
   axios({

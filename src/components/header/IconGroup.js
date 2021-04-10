@@ -60,7 +60,7 @@ const IconGroup = ({
         <div className="account-dropdown">
           <ul>
           <li>
-              {localStorage.getItem("token")!==null ? JSON.parse(localStorage.getItem("user")).usrName+ `님 환영합니다`:<Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>}
+              {localStorage.getItem("token")!== null ? JSON.parse(localStorage.getItem("user")).usrName+ `님 환영합니다`:<Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>}
             </li>
             <li>
               {localStorage.getItem("token")!== null ? <Link onClick={logout}>Logout</Link>: <Link to={process.env.PUBLIC_URL + "/login-register"}>Register</Link>}

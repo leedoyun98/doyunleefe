@@ -44,7 +44,7 @@ const BlogDetailsStandard = ({ location, match }) => {
                   {/* blog post */}
                    <BlogPostDetail boards={boards} key={boards.brdNo}/>
                   {/* blog post comment */}
-                  <BlogComment boards={boards} />
+                  <BlogComment />
                 </div>
               </div>
           
