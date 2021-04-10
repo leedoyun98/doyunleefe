@@ -12,3 +12,8 @@ export {default as BlogSearchList} from '__board__/pages/BlogSearchList'
 export {default as BlogComment} from '__board__/modules/BlogComment'
 export {default as BlogSearch} from '__board__/modules/BlogSearch'
 export {default as BlogCommentUpdate} from '__board__/modules/BlogCommentUpdate'
+export {default as Pagination} from '__board__/modules/Pagination'
+export {default as Paginations} from '__board__/modules/Paginations'
+
+export {default as BlogApp} from '__board__/modules/BlogApp'
+export {default as Posts} from '__board__/modules/Posts'

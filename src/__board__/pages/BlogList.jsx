@@ -1,17 +1,39 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "layouts/LayoutOne";
 import Breadcrumb from "wrappers/breadcrumb/Breadcrumb";
 import BlogPagination from "wrappers/blog/BlogPagination";
-import {BlogPostList} from "__board__/index";
+import {BlogPostList,Paginations} from "__board__/index";
+import BlogApp from "__board__/modules/BlogApp";
+import React, {useEffect,useState} from 'react'
+import axios from 'axios'
+import Paginator from "react-hooks-paginator"
 
 const BlogList = ({ location }) => {
   const { pathname } = location;
-  
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(6);
+  const [offset, setOffset] = useState(0)
+  useEffect( async() => {
+    setLoading(true);
+      await axios.get('http://localhost:8080/board/blogAll', ).then(response=>{
+      setPosts(response.data);
+      setLoading(false);
+    });
+    
+  },[]);
+  const indexOfLast = currentPage * postsPerPage;
+const indexOfFirst = indexOfLast - postsPerPage;
+function currentPosts(tmp) {
+  let currentPosts = 0;
+  currentPosts = tmp.slice(indexOfFirst, indexOfLast);
+  return currentPosts;
+}
   return (
-    <Fragment>
+    <>
       <MetaTags>
         <title>Flone | Blog</title>
         <meta
@@ -33,18 +55,33 @@ const BlogList = ({ location }) => {
                 <div className="mr-20">
                   <div className="row">
                     {/* blog posts */}
-                    <BlogPostList />
-                  </div>
+                    <BlogPostList posts={currentPosts(posts)} loading={loading}></BlogPostList>
+              
 
                   {/* blog pagination */}
-                  <BlogPagination />
-                </div>
+                  <div className="pro-pagination-style text-center mt-30">
+                  <Paginator
+                        totalRecords={posts.length}
+                         pageLimit={postsPerPage}
+                        pageNeighbours={2}
+                        setOffset={setOffset}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        pageContainerClass="mb-0 mt-0"
+                        pagePrevText="«"
+                        pageNextText="»"
+                    />
+                    {/* <Paginations/> */}
+                     </div>
               </div>
             </div>
           </div>
         </div>
+        </div>
+        </div>
       </LayoutOne>
-    </Fragment>
+
+</>
   );
 };
 

@@ -6,7 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogPostDetail, BlogSearchList,CommentUpdate} from '__board__/index'
+import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogPostDetail, BlogSearchList,CommentUpdate,} from '__board__/index'
 import { CartPage, ProductListPage, ProductDetailPage, ProductAddPage, ProductEditPage } from "__product__/index"
 import {UserLoginRegister} from "__user__/index"
 // home pages
@@ -165,7 +165,7 @@ const App = (props) => {
                   component={BlogDetail}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-list"}
+                  path={process.env.PUBLIC_URL + "/blog-list/:id"}
                   component={BlogList}
                 />
               

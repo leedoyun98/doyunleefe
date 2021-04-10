@@ -7,7 +7,7 @@ import React, {useState,useEffect,useCallback} from 'react'
 import {useHistory} from 'react-router'
 import {useForm} from 'react-hook-form'
 import UserAdmin from '__user__/pages/UserAdmin';
-const ProductDescriptionTab = ({ spaceBottomClass,match }) => {
+const ProductDescriptionTab = ({ spaceBottomClass,product }) => {
   const history = useHistory()
   const [brdTitle, setBrdTitle] = useState('')
   const [brdContent, setBrdContent] = useState('')
@@ -43,7 +43,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,match }) => {
         'Content-Type'  : 'application/json',
         'Authorization' : 'JWT fefege..'
       },
-      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo}
+      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo,productNo: product.prdNo}
     })
   .then(resp => {
     alert('리뷰 작성 성공')
@@ -56,7 +56,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,match }) => {
   }
   useEffect(()=>{
     axios({
-    url: 'http://localhost:8080/board/review/all',
+    url: 'http://localhost:8080/board/review/list',
     method: 'get',
     headers: {
       'Content-Type'  : 'application/json',
@@ -111,7 +111,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,match }) => {
                 <Nav.Link eventKey='productDescription'><strong>제품 상세정보</strong></Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey='productReviews'>REVIEWS ()</Nav.Link>
+                <Nav.Link eventKey='productReviews'>REVIEWS ({board.length})</Nav.Link>
               </Nav.Item>
             </Nav>
             <Tab.Content className='description-review-bottom'>

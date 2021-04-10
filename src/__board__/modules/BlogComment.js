@@ -50,22 +50,23 @@ const BlogComment = ({boards}) => {
    
  },[])
  
- const remove1 = () => {
+ const remove = () => {
   const removeBlog = window.confirm("해당 댓글을 삭제하시겠습니까?")
   if(removeBlog){
-    alert(localStorage.getItem("rpl"))
+    alert(localStorage.getItem("rplNo"))
     axios({
-      url: `http://localhost:8080/replies/delete/`+localStorage.getItem("rpl"),
+      url: `http://localhost:8080/replies/delete/`+localStorage.getItem("rplNo"),
       method: 'delete',
-      data:  {}
+      data:  {rplNo: localStorage.getItem("rplNo")}
      })
   .then(resp => {
     alert('댓글이 삭제 되었습니다')
-    localStorage.removeItem("rpl")
+    localStorage.removeItem("rplNo")
     history.go()
   })
   .catch(err => {
     alert('댓글 삭제 실패')
+    localStorage.removeItem("rplNo")
     throw err
   })
   }
@@ -82,8 +83,8 @@ const BlogComment = ({boards}) => {
             <div>
             {localStorage.getItem("token")!=null ? <>
                             {JSON.parse(localStorage.getItem("user")).usrNo==r.usrNo ?<>
-                            <button><Link to={process.env.PUBLIC_URL + `/comment-update/${r.rplNo}`}>수정하기</Link></button>
-                            <button  onClick={remove1} ><Link to={localStorage.setItem("rpl",r.rplNo)}>삭제하기</Link></button></>:''}</> : ''}
+                            <a><Link to={process.env.PUBLIC_URL + `/comment-update/${r.rplNo}`}>수정하기</Link></a>
+                            <Link onClick={remove}><a onClick={()=>{localStorage.setItem("rplNo",r.rplNo)}} >삭제하기</a></Link></>:''}</> : ''}
                             </div>
             <span>October 14, 2018 </span>
             <p>

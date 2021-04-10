@@ -2,36 +2,16 @@ import { Link, Route, Router,ReactDOM } from "react-router-dom";
 import React, { useState, Fragment,useEffect,Component,useCallback } from 'react'
 import axios from 'axios';
 import styled, { createGlobalStyle } from "styled-components";
-import {BlogSearch} from '__board__/index'
-const BlogPostList= ({ history })=>{
-  const [board, setBoard] = useState([])
+import {BlogSearch,Pagination,paginate} from '__board__/index'
+import { BackupRounded } from "@material-ui/icons";
 
- useEffect(()=>{
-    axios({
-    url: 'http://localhost:8080/board/blogAll',
-    method: 'get',
-    headers: {
-      'Content-Type'  : 'application/json',
-      'Authorization' : 'JWT fefege..'
-    },
-    data: {}
-  })
-   .then((res) => {
-    setBoard(res.data)
 
-   })
-   .catch((error) => {
-     alert('실패')
-     throw error;
-   })
-   
- },[])
-
+const BlogPostList= ({ history,posts })=>{
 
   return (
  <>
 
-      {board ? board.map (b=>
+      {posts ? posts.map (b=>
 
       <div className="col-lg-4 col-md-6 col-sm-12"  >
         <div className="blog-wrap-2 mb-30">
@@ -104,10 +84,7 @@ const BlogPostList= ({ history })=>{
     </div>
 
     </div>
-
-<div className="">
-  {localStorage.getItem("user")!=null ?  <a class="float-right" href="#"><Link to= '/blog-detail'>글 작성하기</Link></a>:''}
-   </div>
+      
 
  </> );
       };
