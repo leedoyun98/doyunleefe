@@ -24,7 +24,10 @@ export const getProducts = (products, category, type, limit) => {
     return saleItems.slice(0, limit ? limit : saleItems.length);
   }
 };
-
+// get product discount price
+export const getDiscountPrice = (price, discount) => {
+  return discount && discount > 0 ? price - price * (discount / 100) : null;
+};
 // get product cart quantity
 export const getProductCartQuantity = (cartItems, product, color, size) => {
   let productInCart = cartItems.filter(

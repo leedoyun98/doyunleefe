@@ -6,11 +6,10 @@ import { multilanguage, loadLanguages } from "redux-multilanguage"
 import { connect } from "react-redux"
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic"
 import { MainPage, NotFoundPage } from "__common__/index"
-import { CheckoutPage, MyAccountPage } from "__payment__/index"
 import { UserLoginRegister_ } from "__user__/index"
 import { ProductAddPage, ProductListPage, CategoryLivingPage, CategoryKitchenPage, CategoryBathroomPage, CategoryStationaryPage, ProductDetailPage, ProductEditPage, CartPage, WishlistPage, ProductSearchResultPage } from "__product__/index"
 import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogWriter, CommentUpdate,} from '__board__/index'
-
+import { MyAccount, Checkout, SuccessPage, MyAccountDetail } from "__payment__/index"
 const App = (props) => {
   useEffect(() => {
     props.dispatch(
@@ -156,6 +155,14 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/blog-all"}
                   component={BlogList}
                 />
+                                <Route 
+                  path={process.env.PUBLIC_URL + "/my-account-detail/:id"} 
+                  component={MyAccountDetail}
+                />
+                         <Route
+                  path={process.env.PUBLIC_URL + "/pay-success"}
+                  component={SuccessPage}
+                />
               
             {/* Other pages */}
             <Route
@@ -168,7 +175,7 @@ const App = (props) => {
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/checkout"}
-                  component={CheckoutPage}
+                  component={Checkout}
                 />
       
                 <Route
@@ -177,7 +184,7 @@ const App = (props) => {
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/my-account"}
-                  component={MyAccountPage}
+                  component={MyAccount}
                 />
        <Route
                   path={process.env.PUBLIC_URL + "/not-found"}
