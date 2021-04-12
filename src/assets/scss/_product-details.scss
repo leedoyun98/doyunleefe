@@ -1,6 +1,7 @@
 /*----- 19. Product details page  ---*/
 
 .product-details-img {
+  padding-top: 200px;
   @media #{$lg-layout} {
     &.mr-20 {
       margin-right: 0;
@@ -520,7 +521,7 @@
   }
 }
 
-/* affiliate */
+/* affiliate 
 
 .pro-details-affiliate {
   margin: 30px 0;
@@ -539,7 +540,7 @@
     background-color: #000;
   }
 }
-
+*/
 /* product-details-slider */
 
 .product-details-slider-active {
@@ -643,8 +644,9 @@
 }
 
 .shop-area {
+  margin-top: 50px;
   .sticky {
-    top: 70px !important;
+    top: 100px !important;
   }
 }
 

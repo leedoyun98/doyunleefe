@@ -12,7 +12,7 @@ const ProductDetailPage = ({ location }) => {
   
   useEffect(() => {
     axios({
-      url: 'http://localhost:8080/products/product-number/' + localStorage.getItem(`prdNo`),
+      url: 'http://localhost:8080/product/product-number/' + localStorage.getItem(`prdNo`),
       methos: 'get',
       headers: {
         'Content-Type'  : 'application/json',

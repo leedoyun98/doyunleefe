@@ -5,7 +5,7 @@
       "subtitle": "ZERO WASTE WORLD",
       "text": "JOIN US ?",
       "image": "/assets/img/slider/main-01.png",
-      "url": "/product-all"
+      "url": "/product/all"
     },
     {
       "id": 2,
@@ -13,7 +13,7 @@
       "subtitle": "ZERO WASTE WORLD",
       "text": "JOIN US ?",
       "image": "/assets/img/slider/main-02.png",
-      "url": "/product-all"
+      "url": "/product/all"
     },
     {
       "id": 3,
@@ -21,7 +21,7 @@
       "subtitle": "ZERO WASTE WORLD",
       "text": "JOIN US ?",
       "image": "/assets/img/slider/main-03.png",
-      "url": "/product-all"
+      "url": "/product/all"
     },
     {
       "id": 3,
@@ -29,7 +29,7 @@
       "subtitle": "",
       "text": "",
       "image": "/assets/img/slider/main-04.png",
-      "url": "/product-all"
+      "url": "/product/all"
     }
   ]
   

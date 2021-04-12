@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
-import LayoutOne from "../../layouts/LayoutOne";
+import { Layout, Breadcrumb } from "__common__/index"
 import Sidebar from "../modules/Sidebar"
 import axios from 'axios'
 
@@ -48,7 +48,7 @@ import axios from 'axios'
         />
       </MetaTags>
       {/* //props - children*/}
-      <LayoutOne
+      <Layout
         headerContainerClass="container-fluid"
         headerPaddingClass="header-padding-1">
 
@@ -77,7 +77,7 @@ import axios from 'axios'
           }) : <span>---</span>}
         </table>
 
-      </LayoutOne>
+      </Layout>
     </Fragment>
   );
 };

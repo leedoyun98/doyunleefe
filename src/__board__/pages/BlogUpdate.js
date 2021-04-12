@@ -2,10 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import LayoutOne from "layouts/LayoutOne";
-import Breadcrumb from "wrappers/breadcrumb/Breadcrumb";
-import BlogSidebar from "wrappers/blog/BlogSidebar";
-import BlogComment from "wrappers/blog/BlogComment";
+import { Layout, Breadcrumb } from "__common__/index"
 import {BlogPostUpdate} from "__board__/index"
 import axios from 'axios' 
 const BlogUpdate = ({ location ,match}) => {
@@ -33,7 +30,7 @@ const BlogUpdate = ({ location ,match}) => {
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
 
-      <LayoutOne headerTop="visible">
+      <Layout headerTop="visible">
         <Breadcrumb />
         <div className="blog-area pt-100 pb-100">
           <div className="container">
@@ -42,7 +39,7 @@ const BlogUpdate = ({ location ,match}) => {
             </div>
           </div>
         </div>
-      </LayoutOne>
+      </Layout>
     </Fragment>
   );
 };

@@ -26,7 +26,7 @@ const ProductListPage = ({ location }) => {
 
   useEffect(() => {
     axios({
-      url: 'http://localhost:8080/products/all',
+      url: 'http://localhost:8080/product/all',
       methos: 'get',
       headers: {
         'Content-Type'  : 'application/json',

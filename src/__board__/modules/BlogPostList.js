@@ -12,7 +12,6 @@ const BlogPostList= ({ history,posts })=>{
  <>
 
       {posts ? posts.map (b=>
-
       <div className="col-lg-4 col-md-6 col-sm-12"  >
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
@@ -73,20 +72,25 @@ const BlogPostList= ({ history,posts })=>{
         
           </div>
 
-      ) : '조회 할 페이지가 없습니다'}
+      ): '조회 할 페이지가 없습니다'}
           <div className="same-style header-search d-none d-lg-block">
           <div className="sidebar-widget">
       <h4 className="pro-sidebar-title"> </h4>
       <div className="pro-sidebar-search mb-50 mt-25">
         <form className="pro-sidebar-search-form" action="#">
         </form>
+    
       </div>
     </div>
 
     </div>
-      
+    <div className="">
+  {localStorage.getItem("user")!=null ?  <a class="float-right" href="#"><Link to= '/blog-detail'>글 작성하기</Link></a>:''}
+   </div>
 
  </> );
       };
+
+
 
 export default BlogPostList

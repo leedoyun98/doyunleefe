@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getProductCartQuantity } from 'helpers/product'
-import { addToCart } from '__product__/actions/cartActions'
-import { addToWishlist } from '__product__/actions/wishlistActions'
-import { addToCompare } from '__product__/actions/compareActions'
-import axios from 'axios'
+import React, { useState } from "react"
+import { Link, useHistory } from "react-router-dom"
+import { connect } from "react-redux"
+import { getProductCartQuantity } from "helpers/product"
+import { addToCart } from "__product__/redux/actions/cartActions"
+import { addToWishlist } from "__product__/redux/actions/wishlistActions"
+import axios from "axios"
 
 const ProductDescriptionInfo = ({
   product,
@@ -23,13 +21,19 @@ const ProductDescriptionInfo = ({
     cartItems,
     product
   )
-  
+
+  const editor = e => {
+    e.preventDefault()
+    localStorage.setItem('prdNo', JSON.stringify(product.prdNo))
+    history.push(`/product-edit/${product.prdNo}`)
+  }
+
   const remove = e =>  {
     e.preventDefault()
     const removeConfirm = window.confirm(`해당 제품을 삭제하시겠습니까?`)
     if(removeConfirm) {
       axios({
-        url: 'http://localhost:8080/products/delete/' + localStorage.getItem(`prdNo`),
+        url: 'http://localhost:8080/product/delete/' + product.prdNo,
         method: 'delete',
         headers: {
           'Content-Type'  : 'application/json',
@@ -38,10 +42,11 @@ const ProductDescriptionInfo = ({
         data: {}
       })
       .then(res => {
-        history.push(`/product-all`)
+        console.log(product.prdNo + `번 제품 삭제 성공`)
+        history.push(`/product/all`)
       })
       .catch(err => {
-        console.log(`삭제 실패: ` + err)
+        console.log(product.prdNo + `번 제품 삭제 실패: ` + err)
         throw err
       })
     }
@@ -56,10 +61,10 @@ const ProductDescriptionInfo = ({
 
       <div className="pro-details-list">
         <ul>
-          <li><span><strong>원산지</strong></span> 대한민국 </li>
-          <li><span><strong>브랜드</strong></span> ZER0 SHOP </li>
-          <li><span><strong>구매혜택</strong></span> 구매금액의 5% 적립 ({product.prdPrice * 0.05} Point) </li>
-          <li><span><strong>배송비</strong></span> 2,500원 </li>
+          <li><span><strong>원산지</strong></span>대한민국</li>
+          <li><span><strong>브랜드</strong></span>ZER0 SHOP</li>
+          <li><span><strong>구매혜택</strong></span>구매금액의 5% 적립 ({product.prdPrice * 0.05} Point)</li>
+          <li><span><strong>배송비</strong></span>2,500원 (50,000원 이상 구매시 무료배송)</li>
         </ul>
       </div>
 
@@ -111,63 +116,41 @@ const ProductDescriptionInfo = ({
             <button disabled>Out of Stock</button>
           )}
         </div>
-        <div className="pro-details-wishlist">
-          <button
-            className={wishlistItem !== undefined ? "active" : ""}
-            disabled={wishlistItem !== undefined}
-            title={
-              wishlistItem !== undefined
-                ? "Added to wishlist"
-                : "Add to wishlist"
-            }
-            onClick={() => addToWishlist(product, addToast)}
-          >
-            <i className="pe-7s-like" />
-          </button>
-          <button onClick={() => localStorage.setItem('prdNo', JSON.stringify(product.prdNo))}>
-            <Link to={"/product-edit/" + product.prdNo}>
-              Edit
-            </Link>
-          </button>
-          <button key={product.prdNo} onClick={ remove }> 삭제 </button>
-        </div>
+        {localStorage.getItem('token') !== null ? 
+          <div className="pro-details-wishlist">
+            <button onClick={editor}>수정</button>
+            <button onClick={remove}>삭제</button>
+          </div>
+          :
+          <div className="pro-details-wishlist">
+            <button
+              className={wishlistItem !== undefined ? "active" : ""}
+              title={
+                wishlistItem !== undefined
+                  ? "Added to wishlist"
+                  : "Add to wishlist"
+              }
+              onClick={() => addToWishlist(product, addToast)}
+            >
+              <i className="pe-7s-like" />
+            </button>
+          </div>
+        }
       </div>
 
-      {product.category ? (
+      {product.ctgName ? (
         <div className="pro-details-meta">
-          <span>Categories :</span>
+          <span>Category :</span>
           <ul>
-            {product.category.map((single, key) => {
-              return (
-                <li key={key}>
-                  <Link to={process.env.PUBLIC_URL + "/product-detail"}>
-                    {single}
-                  </Link>
-                </li>
-              )
-            })}
+            <li>
+              <Link to={process.env.PUBLIC_URL + "/product/category-" + product.ctgName}>
+                {product.ctgName}
+              </Link>
+            </li>
           </ul>
         </div>
       ) : (
-        ""
-      )}
-      {product.tag ? (
-        <div className="pro-details-meta">
-          <span>Tags :</span>
-          <ul>
-            {product.tag.map((single, key) => {
-              return (
-                <li key={key}>
-                  <Link to={process.env.PUBLIC_URL + "/product-detail"}>
-                    {single}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ) : (
-        ""
+        "category of product is null"
       )}
 
       <div className="pro-details-social">
@@ -193,18 +176,6 @@ const ProductDescriptionInfo = ({
   )
 }
 
-ProductDescriptionInfo.propTypes = {
-  addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
-  addToWishlist: PropTypes.func,
-  addToast: PropTypes.func,
-  cartItems: PropTypes.array,
-  compareItem: PropTypes.array,
-  currency: PropTypes.object,
-  product: PropTypes.object,
-  wishlistItem: PropTypes.object
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     addToCart: (
@@ -223,9 +194,6 @@ const mapDispatchToProps = dispatch => {
     addToWishlist: (item, addToast) => {
       dispatch(addToWishlist(item, addToast))
     },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast))
-    }
   }
 }
 

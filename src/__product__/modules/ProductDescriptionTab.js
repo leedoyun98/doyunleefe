@@ -43,7 +43,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,product }) => {
         'Content-Type'  : 'application/json',
         'Authorization' : 'JWT fefege..'
       },
-      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo,productNo: product.prdNo}
+      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo}
     })
   .then(resp => {
     alert('리뷰 작성 성공')
@@ -56,7 +56,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,product }) => {
   }
   useEffect(()=>{
     axios({
-    url: 'http://localhost:8080/board/review/list',
+    url: 'http://localhost:8080/board/review/all',
     method: 'get',
     headers: {
       'Content-Type'  : 'application/json',
@@ -192,10 +192,6 @@ const ProductDescriptionTab = ({ spaceBottomClass,product }) => {
                             <p>
                              {b.brdContent}
                              </p>
-                             {/* <h2 onClick={toggle}>
-                             <div className="toggle">
-          {state ? <span>{b.brdLike}</span> : <span>No! 👎</span>}
-        </div></h2> */}
                              작성자: {b.usrName}
                              <div className="review-left">
                            작성시간: {b.brdWrtDate}

@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { Layout, Breadcrumb } from "__common__/index"
 import axios from "axios"
 import {UserLogin, UserRegister} from '__user__/index'
- const UserLoginRegister = ({ location }) => {
+ const UserLoginRegister_ = ({ location }) => {
     const { pathname } = location;
     return (
         <Fragment>
@@ -24,7 +23,7 @@ import {UserLogin, UserRegister} from '__user__/index'
             <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
                 Login Register
       </BreadcrumbsItem>
-            <LayoutOne headerTop="visible">
+            <Layout headerTop="visible">
                 {/* breadcrumb */}
                 <Breadcrumb />
                 <div className="login-register-area pt-100 pb-100">
@@ -67,13 +66,13 @@ import {UserLogin, UserRegister} from '__user__/index'
                         </div>
                     </div>
                 </div>
-            </LayoutOne>
+            </Layout>
         </Fragment>
     );
 };
 
-UserLoginRegister.propTypes = {
+UserLoginRegister_.propTypes = {
     location: PropTypes.object
 };
 
-export default UserLoginRegister;
+export default UserLoginRegister_;

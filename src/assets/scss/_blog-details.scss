@@ -6,34 +6,8 @@
     img {
       width: 100%;
     }
-    .video-icon {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      left: 0;
-
-      transform: translateY(-50%);
-      text-align: center;
-      a {
-        font-size: 25px;
-        line-height: 61px;
-
-        display: inline-block;
-
-        width: 60px;
-        height: 60px;
-
-        color: #fff;
-        border-radius: 50px;
-        background-color: #ff0000;
-        &:hover {
-          background-color: $theme-color;
-        }
-      }
-    }
   }
   .blog-details-content {
-    margin-top: 30px;
     .blog-meta-2 {
       display: flex;
       ul {

@@ -1,34 +1,33 @@
-import React from 'react'
-import LayoutOne from 'layouts/LayoutOne'
-import Breadcrumb from 'wrappers/breadcrumb/Breadcrumb'
-import RelatedProductSlider from '__product__/modules/RelatedProductSlider'
-import ProductDescriptionTab from '__product__/modules/ProductDescriptionTab'
-import ProductImageDescriptionSticky from '__product__/modules/ProductImageDescriptionSticky'
+import React from "react"
+import { Layout, Breadcrumb } from "__common__/index"
+import { RelatedProductSlider, ProductDescriptionTab, ProductImageDescriptionSticky } from "__product__/index"
 
 const ProductDetailComp = ({ product }) => {
-    return (<>
-      <LayoutOne headerTop='visible'>
-        {/* breadcrumb */}
-        <Breadcrumb />
+  return (<>
+    <Layout headerTop="visible">
+      {/* breadcrumb */}
+      <Breadcrumb />
 
-        {/* product description with image */}
-        <ProductImageDescriptionSticky
-            spaceTopClass='mt-100'
-            spaceBottomClass='mb-100'
-            product={product}
-        />
+      {/* product description with image */}
+      <ProductImageDescriptionSticky
+        spaceTopClass="mt-100"
+        spaceBottomClass="mb-100"
+        product={product}
+      />
 
-        {/* product description tab */}
-        <ProductDescriptionTab
-            spaceBottomClass='pb-90' product={product}
-        />
+      {/* product description tab */}
+      <ProductDescriptionTab
+        spaceBottomClass="pb-90"
+      />
 
-        {/* related product slider */}
-        <RelatedProductSlider
-            spaceBottomClass='pb-95'
-            category={product.ctgName}
-        />
-      </LayoutOne>
-    </>)
+      {/* related product slider */}
+      <RelatedProductSlider
+        spaceBottomClass="pb-95"
+        category={product.category}
+        product={product}
+      />
+    </Layout>
+  </>)
 }
+
 export default ProductDetailComp

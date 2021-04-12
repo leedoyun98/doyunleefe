@@ -1,62 +1,49 @@
 import PropTypes from "prop-types"
-import React, { Fragment } from "react"
+import React from "react"
 import { connect } from "react-redux"
-import { addToCart } from "__product__/actions/cartActions"
-import { addToCompare } from "__product__/actions/compareActions"
-import { addToWishlist } from "__product__/actions/wishlistActions"
-import ProductGridListSingle from "__product__/modules/ProductGridListSingle"
+import { addToCart } from "__product__/redux/actions/cartActions"
+import { addToWishlist } from "__product__/redux/actions/wishlistActions"
+import { ProductGridListSingle } from "__product__/index"
 
 const ProductGridList = ({
   products,
   currency,
   addToCart,
   addToWishlist,
-  addToCompare,
   cartItems,
   wishlistItems,
-  compareItems,
   sliderClassName,
   spaceBottomClass
 }) => {
-  return (
-    <Fragment>
-      {products.map(product => {
-        return (
-          <ProductGridListSingle
-            sliderClassName={sliderClassName}
-            spaceBottomClass={spaceBottomClass}
-            product={product}
-            currency={currency}
-            addToCart={addToCart}
-            addToWishlist={addToWishlist}
-            addToCompare={addToCompare}
-            cartItem={
-              cartItems.filter(cartItem => cartItem.id === product.prdNo)[0]
-            }
-            wishlistItem={
-              wishlistItems.filter(
-                wishlistItem => wishlistItem.id === product.prdNo
-              )[0]
-            }
-            compareItem={
-              compareItems.filter(
-                compareItem => compareItem.id === product.prdNo
-              )[0]
-            }
-            key={product.prdNo}
-          />
-        )
-      })}
-    </Fragment>
-  )
+  return (<>
+    {products.map(product => {
+      return (
+        <ProductGridListSingle
+          sliderClassName={sliderClassName}
+          spaceBottomClass={spaceBottomClass}
+          product={product}
+          currency={currency}
+          addToCart={addToCart}
+          addToWishlist={addToWishlist}
+          cartItem={
+            cartItems.filter(cartItem => cartItem.prdNo === product.prdNo)[0]
+          }
+          wishlistItem={
+            wishlistItems.filter(
+              wishlistItem => wishlistItem.prdNo === product.prdNo
+            )[0]
+          }
+          key={product.prdNo}
+        />
+      )}
+    )}
+  </>)
 }
 
 ProductGridList.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
   addToWishlist: PropTypes.func,
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
   currency: PropTypes.object,
   products: PropTypes.array,
   sliderClassName: PropTypes.string,
@@ -69,7 +56,6 @@ const mapStateToProps = state => {
     currency: state.currencyData,
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData
   }
 }
 
@@ -95,9 +81,6 @@ const mapDispatchToProps = dispatch => {
     addToWishlist: (item, addToast) => {
       dispatch(addToWishlist(item, addToast))
     },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast))
-    }
   }
 }
 

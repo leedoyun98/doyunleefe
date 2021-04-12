@@ -1,47 +1,26 @@
-import PropTypes from "prop-types";
-import React, {  useEffect, Suspense, lazy } from "react";
-import ScrollToTop from "helpers/scroll-top";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ToastProvider } from "react-toast-notifications";
-import { multilanguage, loadLanguages } from "redux-multilanguage";
-import { connect } from "react-redux";
-import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogPostDetail, BlogSearchList,CommentUpdate,} from '__board__/index'
-import { CartPage, ProductListPage, ProductDetailPage, ProductAddPage, ProductEditPage } from "__product__/index"
-import {UserLoginRegister} from "__user__/index"
-// home pages
-const MainPage = lazy(() => import("__common__/pages/MainPage"))
-
-
-// shop pages
-
-// other pages
-const About = lazy(() => import("pages/other/About"));
-const Contact = lazy(() => import("pages/other/Contact"));
-const MyAccount = lazy(() => import("__payment__/MyAccount"));
-const LoginRegister = lazy(() => import("pages/other/LoginRegister"));
-
-const Cart = lazy(() => import("pages/other/Cart"));
-const Wishlist = lazy(() => import("pages/other/Wishlist"));
-const Compare = lazy(() => import("pages/other/Compare"));
-const Checkout = lazy(() => import("__payment__/Checkout"));
-
-const NotFound = lazy(() => import("pages/other/NotFound"));
+import React, { Suspense, lazy, useEffect } from "react"
+import ScrollToTop from "helpers/scroll-top"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { ToastProvider } from "react-toast-notifications"
+import { multilanguage, loadLanguages } from "redux-multilanguage"
+import { connect } from "react-redux"
+import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic"
+import { MainPage, NotFoundPage } from "__common__/index"
+import { CheckoutPage, MyAccountPage } from "__payment__/index"
+import { UserLoginRegister_ } from "__user__/index"
+import { ProductAddPage, ProductListPage, CategoryLivingPage, CategoryKitchenPage, CategoryBathroomPage, CategoryStationaryPage, ProductDetailPage, ProductEditPage, CartPage, WishlistPage, ProductSearchResultPage } from "__product__/index"
+import {BlogDetail,BlogList,BlogDetailsStandard,BlogUpdate, BlogWriter, CommentUpdate,} from '__board__/index'
 
 const App = (props) => {
-
   useEffect(() => {
     props.dispatch(
       loadLanguages({
         languages: {
-          en: require("translations/english.json"),
-          fn: require("translations/french.json"),
-          de: require("translations/germany.json")
+          en: require("__common__/modules/english.json"),
         }
       })
-    );
-  });
-
+    )
+  })
   return (
 
     <ToastProvider placement="bottom-left">
@@ -76,10 +55,26 @@ const App = (props) => {
                   component={MainPage}
                 />
 
-                {/* Shop pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + "/product-all"}
+                       {/* Shop pages */}
+                       <Route
+                  path={process.env.PUBLIC_URL + "/product/all"}
                   component={ProductListPage}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/product/category-living"}
+                  component={CategoryLivingPage}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/product/category-kitchen"}
+                  component={CategoryKitchenPage}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/product/category-bathroom"}
+                  component={CategoryBathroomPage}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/product/category-stationary"}
+                  component={CategoryStationaryPage}
                 />
 
                 {/* Shop product pages */}
@@ -93,25 +88,33 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/product-detail/:id"}
                   component={ProductDetailPage}
                 />
-                 <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/product-add"}
                   component={ProductAddPage}
                 />
-                 <Route
+                <Route
+                  path={process.env.PUBLIC_URL + "/product-edit/:id"}
+                  render={(routeProps) => (
+                    <ProductEditPage {...routeProps} key={routeProps.match.params.id} />
+                  )}
+                />
+                <Route
                   path={process.env.PUBLIC_URL + "/product-edit/:id"}
                   component={ProductEditPage}
                 />
-                 {/* <Route
-                  path={process.env.PUBLIC_URL +"/blog-search/:id"}
-                  render={(routeProps) => (
-                    <BlogUpdate {...routeProps} key={routeProps.match.params.id} />
-                  )}
-                /> */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-search"}
-                  component={BlogSearchList}
-                />   
-                {/* Blog pages */}
+                  path={process.env.PUBLIC_URL + "/product/search/:id"}
+                  render={(routeProps) => (
+                    <ProductSearchResultPage {...routeProps} key={routeProps.match.params.id} />
+                  )}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/product/search/:id"}
+                  component={ProductSearchResultPage}
+                />
+
+                  {/* Blog pages */}
+               
                 <Route
                   path={process.env.PUBLIC_URL +"/blog-update/:id"}
                   render={(routeProps) => (
@@ -144,72 +147,44 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL +"/blog-details-standard/:id"}
                   component={BlogDetailsStandard}
                 />
-                {/* <Route
-                  path={process.env.PUBLIC_URL + "/blog-standard"}
-                  component={BlogStandard}
-                /> */}
-                {/* <Route
-                  path={process.env.PUBLIC_URL + "/blog-no-sidebar"}
-                  component={BlogNoSidebar}
-                /> */}
-                {/* <Route
-                  path={process.env.PUBLIC_URL + "/blog-right-sidebar"}
-                  component={BlogRightSidebar}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/blog-details-standard"}
-                  component={BlogDetailsStandard}
-                /> */}
+          
                   <Route
                   path={process.env.PUBLIC_URL + "/blog-detail"}
-                  component={BlogDetail}
+                  component={BlogWriter}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-list/:id"}
+                  path={process.env.PUBLIC_URL + "/blog-all"}
                   component={BlogList}
                 />
               
-                {/* Other pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + "/about"}
-                  component={About}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/contact"}
-                  component={Contact}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/my-account"}
-                  component={MyAccount}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/login-register"}
-                  component={UserLoginRegister}
-                />
-
-                <Route
+            {/* Other pages */}
+            <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={CartPage}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/wishlist"}
-                  component={Wishlist}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/compare"}
-                  component={Compare}
+                  component={WishlistPage}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/checkout"}
-                  component={Checkout}
+                  component={CheckoutPage}
                 />
-
+      
                 <Route
+                  path={process.env.PUBLIC_URL + "/login-register"}
+                  component={UserLoginRegister_}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/my-account"}
+                  component={MyAccountPage}
+                />
+       <Route
                   path={process.env.PUBLIC_URL + "/not-found"}
-                  component={NotFound}
+                  component={NotFoundPage}
                 />
 
-                <Route exact component={NotFound} />
+                <Route exact component={NotFoundPage} />
               </Switch>
             </Suspense>
           </ScrollToTop>
@@ -219,8 +194,5 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
-  dispatch: PropTypes.func
-};
 
 export default connect()(multilanguage(App));

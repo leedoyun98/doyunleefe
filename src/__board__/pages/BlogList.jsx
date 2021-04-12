@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import LayoutOne from "layouts/LayoutOne";
-import Breadcrumb from "wrappers/breadcrumb/Breadcrumb";
-import BlogPagination from "wrappers/blog/BlogPagination";
-import {BlogPostList,Paginations} from "__board__/index";
-import BlogApp from "__board__/modules/BlogApp";
+import { Layout, Breadcrumb } from "__common__/index"
+import {BlogPostList,} from "__board__/index";
 import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 import Paginator from "react-hooks-paginator"
@@ -45,7 +42,7 @@ function currentPosts(tmp) {
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Blog
       </BreadcrumbsItem>
-      <LayoutOne headerTop="visible">
+      <Layout headerTop="visible">
         {/* breadcrumb */}
         <Breadcrumb />
         <div className="blog-area pt-100 pb-100 blog-no-sidebar">
@@ -71,7 +68,6 @@ function currentPosts(tmp) {
                         pagePrevText="«"
                         pageNextText="»"
                     />
-                    {/* <Paginations/> */}
                      </div>
               </div>
             </div>
@@ -79,7 +75,7 @@ function currentPosts(tmp) {
         </div>
         </div>
         </div>
-      </LayoutOne>
+      </Layout>
 
 </>
   );

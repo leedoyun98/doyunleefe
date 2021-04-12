@@ -4,7 +4,6 @@ import axios from 'axios'
 import {paginate} from '__board__/index';
 import ReactPaginate from "react-paginate";
 import Paginator from "react-hooks-paginator"
-import LayoutOne from "layouts/LayoutOne"
 function BlogApp() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);

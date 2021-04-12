@@ -1,26 +1,19 @@
 import PropTypes from "prop-types"
 import React, { useState, useEffect } from "react"
-import ProductImageDescriptionStickyComp from '__product__/modules/ProductImageDescriptionStickyComp'
-import axios from 'axios'
+import { ProductImageDescriptionStickyComp } from "__product__/index"
+import axios from "axios"
 
-const ProductImageDescriptionSticky = () => {
+const ProductImageDescriptionSticky = ({ product }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios({
-      url: 'http://localhost:8080/products/product-number/' + localStorage.getItem(`prdNo`),
-      methos: 'get',
-      headers: {
-        'Content-Type'  : 'application/json',
-        'Authorization' : 'JWT fefege..'
-      },
-      data: {}
-    })
+    axios.get('http://localhost:8080/product/product-number/' + product.prdNo, )
     .then((res) => {
       setProducts(res.data)
+      console.log(product.prdNo + `번 제품 이미지 조회 성공`)
     })
     .catch((err) => {
-      console.log(`error!`)
+      console.log(`제품 이미지 조회 실패` + err)
       throw err
     })
   }, [])
@@ -36,7 +29,6 @@ const ProductImageDescriptionSticky = () => {
 
 ProductImageDescriptionSticky.propTypes = {
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
   currency: PropTypes.object,
   product: PropTypes.object,
   spaceBottomClass: PropTypes.string,

@@ -5,7 +5,7 @@
     letter-spacing: 1rem;
     line-height: 1.1;
     margin-bottom: 30px;
-    color: #a749ff;
+    color: $theme-color;
     @media #{$lg-layout} {
       font-size: 15rem;
       margin-bottom: 4px;
@@ -26,6 +26,9 @@
     font-size: 25px;
     font-weight: 600;
   }
+  p {
+    margin-bottom: 45px;
+  }
 }
 
 .error-btn {
@@ -40,7 +43,7 @@
   padding: 0 10px;
   border: none;
   border-radius: 0;
-  background-color: #a749ff;
+  background-color: $theme-color;
   display: inline-block;
   &:after {
     position: absolute;
@@ -49,7 +52,7 @@
     bottom: -6px;
     height: 3px;
     width: 100%;
-    background-color: #a749ff;
+    background-color: $theme-color;
     transition: all 0.3s;
   }
   &:hover {
@@ -57,37 +60,6 @@
     color: #fff;
     &:after {
       background-color: #111111;
-    }
-  }
-}
-
-.searchform {
-  position: relative;
-  & input {
-    border: 1px solid #eeeeee;
-    height: 45px;
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 80px;
-    background-color: transparent;
-  }
-  & button {
-    border: none;
-    background-color: #a749ff;
-    width: 70px;
-    color: #fff;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    &:hover {
-      background-color: #000;
-    }
-  }
-  @media #{$xs-layout} {
-    &.mb-50 {
-      margin-bottom: 20px;
     }
   }
 }

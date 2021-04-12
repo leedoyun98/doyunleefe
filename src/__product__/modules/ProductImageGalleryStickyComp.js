@@ -18,4 +18,5 @@ const ProductImageGalleryStickyComp = ({ product }) => {
     </div>
   )
 }
+
 export default ProductImageGalleryStickyComp

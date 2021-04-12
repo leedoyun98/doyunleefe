@@ -1,4 +1,20 @@
-export {default as CategorySlider} from '__common__/modules/CategorySlider'
-export {default as FeatureIcon} from '__common__/modules/FeatureIcon'
-export {default as HeroSlider} from '__common__/modules/HeroSlider'
-export {default as MainPage} from '__common__/pages/MainPage'
+export { default as CategorySlider } from "__common__/modules/CategorySlider"
+export { default as FeatureIcon } from "__common__/modules/FeatureIcon"
+export { default as HeroSlider } from "__common__/modules/HeroSlider"
+export { default as Layout } from "__common__/modules/Layout"
+export { default as Breadcrumb } from "__common__/modules/Breadcrumb"
+export { default as CategorySingle } from "__common__/modules/CategorySingle"
+export { default as SectionTitle } from "__common__/modules/SectionTitle"
+export { default as SectionTitleTwo } from "__common__/modules/SectionTitleTwo"
+export { default as FeatureIconSingle } from "__common__/modules/FeatureIconSingle"
+export { default as HeroSliderSingle } from "__common__/modules/HeroSliderSingle"
+export { default as Header } from "__common__/modules/header/Header"
+export { default as IconGroup } from "__common__/modules/header/IconGroup"
+export { default as Logo } from "__common__/modules/header/Logo"
+export { default as MenuCart } from "__common__/modules/header/MenuCart"
+export { default as NavMenu } from "__common__/modules/header/NavMenu"
+export { default as HeaderSocial } from "__common__/modules/header/HeaderSocial"
+export { default as Footer } from "__common__/modules/footer/Footer"
+export { default as FooterCopyright } from "__common__/modules/footer/FooterCopyright"
+export { default as MainPage } from "__common__/pages/MainPage"
+export { default as NotFoundPage } from "__common__/pages/NotFoundPage"

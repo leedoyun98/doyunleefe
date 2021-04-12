@@ -1,54 +1,31 @@
-import PropTypes from "prop-types"
 import React from "react"
-import { setActiveSort } from "helpers/product"
+import { useHistory } from "react-router"
 
-const ShopCategories = ({ categories, getSortParams }) => {
+const ShopCategories = () => {
+  const history = useHistory()
+
   return (
     <div className="sidebar-widget">
-      <h4 className="pro-sidebar-title">Categories </h4>
+      <h4 className="pro-sidebar-title">Categories</h4>
       <div className="sidebar-widget-list mt-30">
-        {categories ? (
-          <ul>
-            <li>
-              <div className="sidebar-widget-list-left">
-                <button
-                  onClick={e => {
-                    getSortParams("category", "")
-                    setActiveSort(e)
-                  }}
-                >
-                  <span className="checkmark" /> All Categories
-                </button>
-              </div>
-            </li>
-            {categories.map((category, key) => {
-              return (
-                <li key={key}>
-                  <div className="sidebar-widget-list-left">
-                    <button
-                      onClick={e => {
-                        getSortParams("category", category)
-                        setActiveSort(e)
-                      }}
-                    >
-                      {" "}
-                      <span className="checkmark" /> {category}{" "}
-                    </button>
-                  </div>
-                </li>
-              )}
-            )}
-          </ul>
-        ) : (
-          "No categories found"
-        )}
+        <ul>
+          <a onClick={() => { history.push(`/product/all`) }}>상품 전체보기</a>
+        </ul>
+        <ul>
+          <a onClick={() => { history.push(`/product/category-living`) }}>생활용품</a>
+        </ul>
+        <ul>
+          <a onClick={() => { history.push(`/product/category-kitchen`) }}>주방용품</a>
+        </ul>
+        <ul>
+          <a onClick={() => { history.push(`/product/category-bathroom`) }}>욕실용품</a>
+        </ul>
+        <ul>
+          <a onClick={() => { history.push(`/product/category-stationary`) }}>문구용품</a>
+        </ul>
       </div>
     </div>
   )
 }
 
-ShopCategories.propTypes = {
-  categories: PropTypes.array,
-  getSortParams: PropTypes.func
-}
 export default ShopCategories
