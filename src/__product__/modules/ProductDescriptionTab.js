@@ -43,7 +43,7 @@ const ProductDescriptionTab = ({ spaceBottomClass,product }) => {
         'Content-Type'  : 'application/json',
         'Authorization' : 'JWT fefege..'
       },
-      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo}
+      data: {brdTitle,brdContent,brdWrtDate,brdRank,brdImg,brdLike,brdNikcname,brdKind: 2,usrName: JSON.parse(localStorage.getItem("user")).usrName,usrNo: JSON.parse(localStorage.getItem("user")).usrNo,productNo: product.prdNo}
     })
   .then(resp => {
     alert('리뷰 작성 성공')

@@ -22,7 +22,7 @@ const CategoryStationaryPage = ({ location }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/category/stationary', )
+    axios.get('http://localhost:8080/products/category/stationary', )
     .then((res) => {
       console.log(products.category + `카테고리 전체보기 성공`)
       setProducts(res.data)

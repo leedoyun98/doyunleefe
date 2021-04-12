@@ -33,7 +33,7 @@ const ProductDescriptionInfo = ({
     const removeConfirm = window.confirm(`해당 제품을 삭제하시겠습니까?`)
     if(removeConfirm) {
       axios({
-        url: 'http://localhost:8080/product/delete/' + product.prdNo,
+        url: 'http://localhost:8080/products/delete/' + product.prdNo,
         method: 'delete',
         headers: {
           'Content-Type'  : 'application/json',

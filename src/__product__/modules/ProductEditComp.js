@@ -22,7 +22,7 @@ const ProductEditComp = () => {
   const edit = e => {
     e.preventDefault()
     axios({
-        url: `http://localhost:8080/product/edit/` + localStorage.getItem('prdNo'),
+        url: `http://localhost:8080/products/edit/` + localStorage.getItem('prdNo'),
         method: 'put',
         headers: {
           'Content-Type'  : 'application/json',

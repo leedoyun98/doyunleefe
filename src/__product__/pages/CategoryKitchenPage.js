@@ -21,7 +21,7 @@ const CategoryKitchenPage = ({ location }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/category/kitchen', )
+    axios.get('http://localhost:8080/products/category/kitchen', )
     .then((res) => {
       console.log(products.category + `카테고리 전체보기 성공`)
       setProducts(res.data)

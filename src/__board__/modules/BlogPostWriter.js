@@ -41,7 +41,7 @@ const BlogPostWriter = () => {
     })
   .then(resp => {
     alert('글쓰기 성공')
-    history.push('/blog-list')
+    history.push('/blog-all')
   })
   .catch(err => {
     alert('글쓰기 실패')

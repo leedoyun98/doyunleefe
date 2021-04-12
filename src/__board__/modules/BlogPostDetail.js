@@ -18,7 +18,7 @@ const remove = () => {
      })
   .then(resp => {
     alert('글이 삭제 되었습니다')
-    history.push('/blog-list')
+    history.push('/blog-all')
   })
   .catch(err => {
     alert('글 삭제 실패')

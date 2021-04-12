@@ -22,7 +22,7 @@ const CategoryBathroomPage = ({ location }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/category/bathroom', )
+    axios.get('http://localhost:8080/products/category/bathroom', )
     .then((res) => {
       console.log(products.category + `카테고리 전체보기 성공`)
       setProducts(res.data)

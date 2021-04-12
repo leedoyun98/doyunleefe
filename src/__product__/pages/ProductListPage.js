@@ -23,7 +23,7 @@ const ProductListPage = ({ location }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/all', )
+    axios.get('http://localhost:8080/products/all', )
     .then((res) => {
       console.log(`제품 전체보기 성공`)
       setProducts(res.data)

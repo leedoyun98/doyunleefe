@@ -6,7 +6,7 @@ const ProductImageGallerySticky = ({ product }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/product-number/' + product.prdNo, )
+    axios.get('http://localhost:8080/products/product-number/' + product.prdNo, )
     .then((res) => {
       setProducts(res.data)
       console.log(product.prdNo + `번 제품 정보 불러오기 성공`)

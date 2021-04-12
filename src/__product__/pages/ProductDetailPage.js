@@ -11,7 +11,7 @@ const ProductDetailPage = ({ location, match }) => {
   const [products, setProducts] = useState([])
   
   useEffect(() => {
-    axios.get('http://localhost:8080/product/product-number/' + match.params.id, )
+    axios.get('http://localhost:8080/products/product-number/' + match.params.id, )
     .then((res) => {
       console.log(match.params.id + `번 제품 상세보기 성공`)
       setProducts(res.data)

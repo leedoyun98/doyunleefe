@@ -19,7 +19,7 @@ const ProductGrid = ({
   const [products, setProducts] = useState([])
   
   useEffect(() => {
-    axios.get('http://localhost:8080/product/category/' + product.ctgName, )
+    axios.get('http://localhost:8080/products/category/' + product.ctgName, )
     .then((res) => {
       console.log(product.ctgName + ` 카테고리 조회 성공`)
       setProducts(res.data)

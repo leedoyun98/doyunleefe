@@ -7,7 +7,7 @@ const ProductImageDescriptionSticky = ({ product }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/product/product-number/' + product.prdNo, )
+    axios.get('http://localhost:8080/products/product-number/' + product.prdNo, )
     .then((res) => {
       setProducts(res.data)
       console.log(product.prdNo + `번 제품 이미지 조회 성공`)
